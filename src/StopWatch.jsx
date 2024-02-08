@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 const StopWatch = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [time, setTime] = useState(0);
-  const timerID = useRef();
 
   const formatTime = (time) => {
     const min = Math.floor(time / 60);
@@ -17,13 +16,13 @@ const StopWatch = () => {
   }
 
   useEffect(() => {
-    timerID.current = setTimeout(()=>{
-        if(isRunning)
+    let id = setInterval(()=>{
+      if(isRunning)
             setTime((prv)=> prv + 1);
-    }, 1000)
+    },1000); 
 
     return () => {
-        clearTimeout(timerID.current);
+        clearInterval(id);
     }
 
   }, [isRunning, time])
