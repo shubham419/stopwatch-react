@@ -11,6 +11,11 @@ const StopWatch = () => {
     return `${min}:${sec < 10 ? "0" + sec : sec}`;
   };
 
+  const handleReset = () => {
+    setIsRunning(false);
+    setTime(0);
+  }
+
   useEffect(() => {
     timerID.current = setTimeout(()=>{
         if(isRunning)
@@ -30,7 +35,7 @@ const StopWatch = () => {
       <h1>Stopwatch</h1>
       <p>Time: {formatTime(time)}</p>
       <button onClick={handleToggel}>{isRunning ? "Stope" : "Start"}</button>
-      <button>Reset</button>
+      <button onClick={handleReset}>Reset</button>
     </div>
   );
 };
